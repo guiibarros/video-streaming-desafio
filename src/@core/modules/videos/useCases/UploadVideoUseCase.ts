@@ -1,6 +1,11 @@
-import { IUploadVideoDTO } from '../dtos/IUploadVideoDTO';
 import { Video } from '../entities/Video';
 import { IVideosRepository } from '../repositories/IVideosRepository';
+
+interface IUploadVideoRequest {
+  title: string;
+  description: string;
+  userId: string;
+}
 
 interface IUploadVideoResponse {
   video: Video;
@@ -10,9 +15,15 @@ export class UploadVideoUseCase {
   public constructor(private readonly videosRepository: IVideosRepository) {}
 
   public async execute(
-    uploadVideoRequest: IUploadVideoDTO,
+    request: IUploadVideoRequest,
   ): Promise<IUploadVideoResponse> {
-    const video = new Video(uploadVideoRequest);
+    const { title, description, userId } = request;
+
+    const video = new Video({
+      title,
+      description,
+      userId,
+    });
 
     await this.videosRepository.create(video);
 

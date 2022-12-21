@@ -2,12 +2,12 @@ import { IncorrectEmailOrPasswordError } from '../errors/IncorrectEmailOrPasswor
 import { IAuthProvider } from '../providers/IAuthProvider';
 import { IUsersRepository } from '../repositories/IUsersRepository';
 
-interface IAuthRequest {
+interface IAuthenticateUserRequest {
   email: string;
   password: string;
 }
 
-interface IAuthResponse {
+interface IAuthenticateUserResponse {
   token: string;
 }
 
@@ -17,7 +17,9 @@ export class AuthenticateUserUseCase {
     private readonly authProvider: IAuthProvider,
   ) {}
 
-  public async execute(request: IAuthRequest): Promise<IAuthResponse> {
+  public async execute(
+    request: IAuthenticateUserRequest,
+  ): Promise<IAuthenticateUserResponse> {
     const { email, password } = request;
 
     const user = await this.usersRepository.findByEmail(email);

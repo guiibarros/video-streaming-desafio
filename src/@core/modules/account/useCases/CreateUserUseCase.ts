@@ -1,7 +1,12 @@
-import { ICreateUserDTO } from '../dtos/ICreateUserDTO';
 import { User } from '../entities/User';
 import { UserAlreadyExistsError } from '../errors/UserAlreadyExistsError';
 import { IUsersRepository } from '../repositories/IUsersRepository';
+
+interface ICreateUserRequest {
+  name: string;
+  email: string;
+  password: string;
+}
 
 interface ICreateUserResponse {
   user: User;
@@ -11,17 +16,21 @@ export class CreateUserUseCase {
   public constructor(private readonly usersRepository: IUsersRepository) {}
 
   public async execute(
-    createUser: ICreateUserDTO,
+    request: ICreateUserRequest,
   ): Promise<ICreateUserResponse> {
-    const userAlreadyExists = await this.usersRepository.findByEmail(
-      createUser.email,
-    );
+    const { email, name, password } = request;
+
+    const userAlreadyExists = await this.usersRepository.findByEmail(email);
 
     if (userAlreadyExists) {
       throw new UserAlreadyExistsError();
     }
 
-    const user = new User(createUser);
+    const user = new User({
+      email,
+      name,
+      password,
+    });
 
     await this.usersRepository.create(user);
 

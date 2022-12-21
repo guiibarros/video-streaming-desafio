@@ -1,26 +1,23 @@
 import { VideoFactory } from '@test/factories/VideoFactory';
 import { InMemoryVideosRepository } from '@test/repositories/in-memory/InMemoryVideosRepository';
 
-import { GetUserVideosUseCase } from './GetUserVideosUseCase';
+import { GetAllVideosUseCase } from './GetAllVideosUseCase';
 
-describe('Get user videos', () => {
-  it('should be able to get all user videos', async () => {
+describe('Get all videos', () => {
+  it('should be able to get all videos', async () => {
     const videosRepository = new InMemoryVideosRepository();
-    const getUserVideosUseCase = new GetUserVideosUseCase(videosRepository);
+    const getAllVideosUseCase = new GetAllVideosUseCase(videosRepository);
 
     await videosRepository.create(VideoFactory.make({ userId: 'user-1' }));
+    await videosRepository.create(VideoFactory.make({ userId: 'user-2' }));
 
-    await videosRepository.create(VideoFactory.make({ userId: 'user-1' }));
-
-    const { videos } = await getUserVideosUseCase.execute({
-      userId: 'user-1',
-    });
+    const { videos } = await getAllVideosUseCase.execute();
 
     expect(videos).toHaveLength(2);
     expect(videos).toEqual(
       expect.arrayContaining([
         expect.objectContaining({ userId: 'user-1' }),
-        expect.objectContaining({ userId: 'user-1' }),
+        expect.objectContaining({ userId: 'user-2' }),
       ]),
     );
   });
