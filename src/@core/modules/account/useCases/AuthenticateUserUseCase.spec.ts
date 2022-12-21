@@ -2,12 +2,11 @@ import { JWTAuthProvider } from '@infra/http/providers/AuthProvider/JWTAuthProvi
 import { UserFactory } from '@test/factories/UserFactory';
 import { InMemoryUsersRepository } from '@test/repositories/in-memory/InMemoryUsersRepository';
 
-import { IAuthProvider } from '../providers/IAuthProvider';
-import { IUsersRepository } from '../repositories/IUsersRepository';
+import { IncorrectEmailOrPasswordError } from '../errors/IncorrectEmailOrPasswordError';
 import { AuthenticateUserUseCase } from './AuthenticateUserUseCase';
 
-let usersRepository: IUsersRepository;
-let authProvider: IAuthProvider;
+let usersRepository: InMemoryUsersRepository;
+let authProvider: JWTAuthProvider;
 let authenticateUserUseCase: AuthenticateUserUseCase;
 
 describe('Authenticate user', () => {
@@ -39,7 +38,7 @@ describe('Authenticate user', () => {
         email: 'invalid-email',
         password: 'invalid-pass',
       }),
-    ).rejects.toThrow('Email or password incorrect.');
+    ).rejects.toThrow(IncorrectEmailOrPasswordError);
   });
 
   it('should not be able to authenticate user with a incorrect password', async () => {
@@ -52,6 +51,6 @@ describe('Authenticate user', () => {
         email: user.email,
         password: 'invalid-pass',
       }),
-    ).rejects.toThrow('Email or password incorrect.');
+    ).rejects.toThrow(IncorrectEmailOrPasswordError);
   });
 });

@@ -1,3 +1,4 @@
+import { IncorrectEmailOrPasswordError } from '../errors/IncorrectEmailOrPasswordError';
 import { IAuthProvider } from '../providers/IAuthProvider';
 import { IUsersRepository } from '../repositories/IUsersRepository';
 
@@ -22,11 +23,11 @@ export class AuthenticateUserUseCase {
     const user = await this.usersRepository.findByEmail(email);
 
     if (!user) {
-      throw new Error('Email or password incorrect.');
+      throw new IncorrectEmailOrPasswordError();
     }
 
     if (user.password !== password) {
-      throw new Error('Email or password incorrect.');
+      throw new IncorrectEmailOrPasswordError();
     }
 
     const token = this.authProvider.login(user.id);

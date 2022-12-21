@@ -1,7 +1,7 @@
 import { sign } from 'jsonwebtoken';
 
-import auth from '@config/auth';
-import { IAuthProvider } from '@modules/account/providers/IAuthProvider';
+import auth from '@core/config/auth';
+import { IAuthProvider } from '@core/modules/account/providers/IAuthProvider';
 
 export class JWTAuthProvider implements IAuthProvider {
   public login(id: string): string {

@@ -1,5 +1,5 @@
-import { User } from '@modules/account/entities/User';
-import { IUsersRepository } from '@modules/account/repositories/IUsersRepository';
+import { User } from '@core/modules/account/entities/User';
+import { IUsersRepository } from '@core/modules/account/repositories/IUsersRepository';
 
 export class InMemoryUsersRepository implements IUsersRepository {
   public readonly users: User[] = [];

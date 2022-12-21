@@ -10,10 +10,9 @@
     "outDir": "./dist",
     "baseUrl": "./src",
     "paths": {
-      "@modules/*": ["modules/*"],
-      "@utils/*": ["utils/*"],
-      "@config/*": ["config/*"],
+      "@core/*": ["@core/*"],
       "@infra/*": ["infra/*"],
+      "@utils/*": ["utils/*"],
       "@test/*": ["test/*"]
     },
     "incremental": true,

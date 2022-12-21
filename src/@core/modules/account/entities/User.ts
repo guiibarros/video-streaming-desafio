@@ -2,7 +2,7 @@ import { randomUUID } from 'node:crypto';
 
 import { Replace } from '@utils/Replace';
 
-interface IUserProps {
+export interface IUserProps {
   name: string;
   email: string;
   password: string;
