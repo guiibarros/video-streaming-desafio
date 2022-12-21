@@ -1,5 +1,6 @@
-import { User } from '@core/modules/account/entities/User';
 import { User as RawUser } from '@prisma/client';
+
+import { User } from '@core/modules/account/entities/User';
 
 export class PrismaUserMapper {
   private constructor() {}

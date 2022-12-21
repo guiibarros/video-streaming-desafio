@@ -39,7 +39,13 @@ module.exports = {
         newlinesBetween: 'always',
         groups: [
           'module',
-          '/^@/',
+          [
+            "/^@core/",
+            "/^@shared/",
+            "/^@infra/",
+            "/^@utils/",
+            "/^@test/"
+          ],
           ['parent', 'sibling', 'index']
         ],
         alphabetize: {

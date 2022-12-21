@@ -13,8 +13,11 @@ export class Video {
   private readonly _id: string;
   private readonly props: IVideoProps;
 
-  public constructor(props: Replace<IVideoProps, { createdAt?: Date }>) {
-    this._id = randomUUID();
+  public constructor(
+    props: Replace<IVideoProps, { createdAt?: Date }>,
+    id: string,
+  ) {
+    this._id = id ?? randomUUID();
 
     this.props = {
       ...props,
