@@ -1,4 +1,4 @@
-import { JWTAuthProvider } from '@infra/http/providers/AuthProvider/JWTAuthProvider';
+import { JWTAuthProvider } from '@shared/providers/AuthProvider/JWTAuthProvider';
 import { UserFactory } from '@test/factories/UserFactory';
 import { InMemoryUsersRepository } from '@test/repositories/in-memory/InMemoryUsersRepository';
 

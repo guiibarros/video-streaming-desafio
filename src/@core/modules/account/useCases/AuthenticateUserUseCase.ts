@@ -1,3 +1,5 @@
+import { inject, injectable } from 'tsyringe';
+
 import { IncorrectEmailOrPasswordError } from '../errors/IncorrectEmailOrPasswordError';
 import { IAuthProvider } from '../providers/IAuthProvider';
 import { IUsersRepository } from '../repositories/IUsersRepository';
@@ -11,9 +13,12 @@ interface IAuthenticateUserResponse {
   token: string;
 }
 
+@injectable()
 export class AuthenticateUserUseCase {
   public constructor(
+    @inject('UsersRepository')
     private readonly usersRepository: IUsersRepository,
+    @inject('AuthProvider')
     private readonly authProvider: IAuthProvider,
   ) {}
 

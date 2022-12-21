@@ -1,3 +1,5 @@
+import { inject, injectable } from 'tsyringe';
+
 import { User } from '../entities/User';
 import { UserAlreadyExistsError } from '../errors/UserAlreadyExistsError';
 import { IUsersRepository } from '../repositories/IUsersRepository';
@@ -12,8 +14,12 @@ interface ICreateUserResponse {
   user: User;
 }
 
+@injectable()
 export class CreateUserUseCase {
-  public constructor(private readonly usersRepository: IUsersRepository) {}
+  public constructor(
+    @inject('UsersRepository')
+    private readonly usersRepository: IUsersRepository,
+  ) {}
 
   public async execute(
     request: ICreateUserRequest,

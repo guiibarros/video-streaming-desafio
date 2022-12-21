@@ -13,8 +13,11 @@ export class User {
   private readonly _id: string;
   private readonly props: IUserProps;
 
-  public constructor(props: Replace<IUserProps, { createdAt?: Date }>) {
-    this._id = randomUUID();
+  public constructor(
+    props: Replace<IUserProps, { createdAt?: Date }>,
+    id?: string,
+  ) {
+    this._id = id ?? randomUUID();
 
     this.props = {
       ...props,
