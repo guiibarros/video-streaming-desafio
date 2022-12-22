@@ -7,6 +7,7 @@ interface IUploadVideoRequest {
   title: string;
   description: string;
   userId: string;
+  videoUrl: string;
 }
 
 interface IUploadVideoResponse {
@@ -23,12 +24,13 @@ export class UploadVideoUseCase {
   public async execute(
     request: IUploadVideoRequest,
   ): Promise<IUploadVideoResponse> {
-    const { title, description, userId } = request;
+    const { title, description, userId, videoUrl } = request;
 
     const video = new Video({
       title,
       description,
       userId,
+      videoUrl,
     });
 
     await this.videosRepository.create(video);

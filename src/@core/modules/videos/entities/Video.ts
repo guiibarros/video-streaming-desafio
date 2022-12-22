@@ -7,6 +7,7 @@ export interface IVideoProps {
   description: string;
   userId: string;
   createdAt: Date;
+  videoUrl: string;
 }
 
 export class Video {
@@ -43,6 +44,14 @@ export class Video {
 
   public set description(description: string) {
     this.props.description = description;
+  }
+
+  public get videoUrl(): string {
+    return this.props.videoUrl;
+  }
+
+  public set videoUrl(videoUrl: string) {
+    this.props.videoUrl = videoUrl;
   }
 
   public get userId(): string {

@@ -6,7 +6,7 @@ import { VideoViewModel } from '@infra/http/ViewModel/VideoViewModel';
 
 export class UploadVideoController {
   public async handle(request: Request, response: Response): Promise<Response> {
-    const { title, description } = request.body;
+    const { title, description, videoUrl } = request.body;
     const { userId } = request.user;
 
     const uploadVideoUseCase = container.resolve(UploadVideoUseCase);
@@ -15,6 +15,7 @@ export class UploadVideoController {
       title,
       description,
       userId,
+      videoUrl,
     });
 
     return response.status(201).json({

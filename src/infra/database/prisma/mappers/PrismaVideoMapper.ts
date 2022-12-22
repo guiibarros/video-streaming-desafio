@@ -11,6 +11,7 @@ export class PrismaVideoMapper {
       title: video.title,
       description: video.description,
       userId: video.userId,
+      videoUrl: video.videoUrl,
       createdAt: video.createdAt,
     };
   }
@@ -21,6 +22,7 @@ export class PrismaVideoMapper {
         title: video.title,
         description: video.description,
         userId: video.userId,
+        videoUrl: video.videoUrl,
         createdAt: video.createdAt,
       },
       video.id,

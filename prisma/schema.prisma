@@ -23,6 +23,7 @@ model Video {
   id          String   @id @default(uuid())
   title       String
   description String
+  videoUrl    String
   user        User     @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   userId      String
   createdAt   DateTime @default(now())

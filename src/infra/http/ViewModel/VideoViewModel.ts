@@ -5,6 +5,7 @@ interface IVideoToHTTP {
   title: string;
   userId: string;
   description: string;
+  videoUrl: string;
   createdAt: Date;
 }
 
@@ -17,6 +18,7 @@ export class VideoViewModel {
       title: video.title,
       userId: video.userId,
       description: video.description,
+      videoUrl: video.videoUrl,
       createdAt: video.createdAt,
     };
   }

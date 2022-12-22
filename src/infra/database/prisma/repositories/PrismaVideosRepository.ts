@@ -1,7 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 import { inject, injectable } from 'tsyringe';
 
-import { Tag } from '@core/modules/videos/entities/Tag';
 import { Video } from '@core/modules/videos/entities/Video';
 import { IVideosRepository } from '@core/modules/videos/repositories/IVideosRepository';
 
