@@ -39,8 +39,8 @@ export class InMemoryVideosRepository implements IVideosRepository {
     });
   }
 
-  public async findManyByTagName(tagName: string): Promise<Video[]> {
-    const tagsRepository = new InMemoryTagsRepository();
+  public async findManyByTagName(tagName: string): Promise<any[]> {
+    const tagsRepository = InMemoryTagsRepository.getInstance();
 
     const tag = await tagsRepository.findByName(tagName);
 
@@ -56,7 +56,12 @@ export class InMemoryVideosRepository implements IVideosRepository {
       );
     });
 
-    return filteredVideos;
+    return filteredVideos.map((video) => {
+      return {
+        ...video,
+        tag,
+      };
+    });
   }
 
   public async findByIdAndUserId(

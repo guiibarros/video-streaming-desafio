@@ -4,6 +4,16 @@ import { ITagsRepository } from '@core/modules/videos/repositories/ITagsReposito
 export class InMemoryTagsRepository implements ITagsRepository {
   public readonly tags: Tag[] = [];
 
+  private static instance: InMemoryTagsRepository;
+
+  public static getInstance() {
+    if (!InMemoryTagsRepository.instance) {
+      InMemoryTagsRepository.instance = new InMemoryTagsRepository();
+    }
+
+    return InMemoryTagsRepository.instance;
+  }
+
   public async create(tag: Tag): Promise<void> {
     this.tags.push(tag);
   }
