@@ -17,7 +17,7 @@ export class UploadVideoController {
       userId,
     });
 
-    return response.json({
+    return response.status(201).json({
       video: VideoViewModel.toHTTP(video),
     });
   }

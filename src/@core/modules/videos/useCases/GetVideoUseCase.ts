@@ -1,3 +1,5 @@
+import { inject, injectable } from 'tsyringe';
+
 import { Video } from '../entities/Video';
 import { VideoNotFoundError } from '../errors/VideoNotFoundError';
 import { IVideosRepository } from '../repositories/IVideosRepository';
@@ -10,8 +12,12 @@ interface IGetVideoResponse {
   video: Video;
 }
 
+@injectable()
 export class GetVideoUseCase {
-  public constructor(private videosRepository: IVideosRepository) {}
+  public constructor(
+    @inject('VideosRepository')
+    private videosRepository: IVideosRepository,
+  ) {}
 
   public async execute(request: IGetVideoRequest): Promise<IGetVideoResponse> {
     const { videoId } = request;

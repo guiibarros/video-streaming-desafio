@@ -1,14 +1,17 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 
-import { GetAllVideosUseCase } from '@core/modules/videos/useCases/GetAllVideosUseCase';
+import { GetUserVideosUseCase } from '@core/modules/videos/useCases/GetUserVideosUseCase';
 import { VideoViewModel } from '@infra/http/ViewModel/VideoViewModel';
 
-export class GetAllVideosController {
+export class GetUserVideosController {
   public async handle(request: Request, response: Response): Promise<Response> {
-    const getAllVideosUseCase = container.resolve(GetAllVideosUseCase);
+    const { id: userId } = request.params;
+    const getUserVideosUseCase = container.resolve(GetUserVideosUseCase);
 
-    const { videos } = await getAllVideosUseCase.execute();
+    const { videos } = await getUserVideosUseCase.execute({
+      userId,
+    });
 
     return response.json({
       videos: videos.map(VideoViewModel.toHTTP),

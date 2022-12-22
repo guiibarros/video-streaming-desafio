@@ -1,3 +1,5 @@
+import { inject, injectable } from 'tsyringe';
+
 import { Video } from '../entities/Video';
 import { IVideosRepository } from '../repositories/IVideosRepository';
 
@@ -9,8 +11,12 @@ interface IGetUserVideosResponse {
   videos: Video[];
 }
 
+@injectable()
 export class GetUserVideosUseCase {
-  public constructor(private readonly videosRepository: IVideosRepository) {}
+  public constructor(
+    @inject('VideosRepository')
+    private readonly videosRepository: IVideosRepository,
+  ) {}
 
   public async execute(
     request: IGetUserVideosRequest,

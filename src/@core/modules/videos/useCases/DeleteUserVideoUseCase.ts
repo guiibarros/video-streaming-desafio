@@ -1,3 +1,5 @@
+import { inject, injectable } from 'tsyringe';
+
 import { VideoNotFoundError } from '../errors/VideoNotFoundError';
 import { IVideosRepository } from '../repositories/IVideosRepository';
 
@@ -8,8 +10,12 @@ interface IDeleteUserVideoRequest {
 
 type IDeleteUserVideoResponse = void;
 
+@injectable()
 export class DeleteUserVideoUseCase {
-  public constructor(private readonly videosRepository: IVideosRepository) {}
+  public constructor(
+    @inject('VideosRepository')
+    private readonly videosRepository: IVideosRepository,
+  ) {}
 
   public async execute(
     request: IDeleteUserVideoRequest,

@@ -1,3 +1,5 @@
+import { inject, injectable } from 'tsyringe';
+
 import { VideoNotFoundError } from '../errors/VideoNotFoundError';
 import { IVideosRepository } from '../repositories/IVideosRepository';
 
@@ -10,8 +12,12 @@ interface IUpdateUserVideoRequest {
 
 type IUpdateUserVideoResponse = void;
 
+@injectable()
 export class UpdateUserVideoUseCase {
-  public constructor(private readonly videosRepository: IVideosRepository) {}
+  public constructor(
+    @inject('VideosRepository')
+    private readonly videosRepository: IVideosRepository,
+  ) {}
 
   public async execute(
     request: IUpdateUserVideoRequest,
