@@ -1,7 +1,7 @@
 import { inject, injectable } from 'tsyringe';
 
-import { VideoNotFoundError } from '../errors/VideoNotFoundError';
-import { IVideosRepository } from '../repositories/IVideosRepository';
+import { VideoNotFoundError } from '../../errors/VideoNotFoundError';
+import { IVideosRepository } from '../../repositories/IVideosRepository';
 
 interface IDeleteUserVideoRequest {
   videoId: string;

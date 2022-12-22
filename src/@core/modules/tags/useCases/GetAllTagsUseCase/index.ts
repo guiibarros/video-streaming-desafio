@@ -1,7 +1,7 @@
 import { inject, injectable } from 'tsyringe';
 
-import { Tag } from '../entities/Tag';
-import { ITagsRepository } from '../repositories/ITagsRepository';
+import { Tag } from '../../entities/Tag';
+import { ITagsRepository } from '../../repositories/ITagsRepository';
 
 interface IGetAllTagsResponse {
   tags: Tag[];

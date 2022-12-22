@@ -1,8 +1,8 @@
 import { UserFactory } from '@test/factories/UserFactory';
 import { InMemoryUsersRepository } from '@test/repositories/in-memory/InMemoryUsersRepository';
 
-import { UserAlreadyExistsError } from '../errors/UserAlreadyExistsError';
-import { CreateUserUseCase } from './CreateUserUseCase';
+import { UserAlreadyExistsError } from '../../errors/UserAlreadyExistsError';
+import { CreateUserUseCase } from './';
 
 let usersRepository: InMemoryUsersRepository;
 let createUserUseCase: CreateUserUseCase;

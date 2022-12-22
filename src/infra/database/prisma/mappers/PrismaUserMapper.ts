@@ -18,7 +18,7 @@ export class PrismaUserMapper {
     };
   }
 
-  public static toDomain(user: RawUser) {
+  public static toDomain(user: RawUser): User {
     return new User(
       {
         email: user.email,

@@ -2,8 +2,8 @@ import { JWTAuthProvider } from '@shared/providers/AuthProvider/JWTAuthProvider'
 import { UserFactory } from '@test/factories/UserFactory';
 import { InMemoryUsersRepository } from '@test/repositories/in-memory/InMemoryUsersRepository';
 
-import { IncorrectEmailOrPasswordError } from '../errors/IncorrectEmailOrPasswordError';
-import { AuthenticateUserUseCase } from './AuthenticateUserUseCase';
+import { IncorrectEmailOrPasswordError } from '../../errors/IncorrectEmailOrPasswordError';
+import { AuthenticateUserUseCase } from './';
 
 let usersRepository: InMemoryUsersRepository;
 let authProvider: JWTAuthProvider;

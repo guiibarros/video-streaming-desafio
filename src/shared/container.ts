@@ -3,7 +3,9 @@ import { PrismaClient } from '@prisma/client';
 import { container } from 'tsyringe';
 
 import { IUsersRepository } from '@core/modules/account/repositories/IUsersRepository';
+import { ITagsRepository } from '@core/modules/tags/repositories/ITagsRepository';
 import { IVideosRepository } from '@core/modules/videos/repositories/IVideosRepository';
+import { PrismaTagsRepository } from '@infra/database/prisma/repositories/PrismaTagsRepository';
 import { PrismaUsersRepository } from '@infra/database/prisma/repositories/PrismaUsesrRepository';
 import { PrismaVideosRepository } from '@infra/database/prisma/repositories/PrismaVideosRepository';
 
@@ -17,6 +19,11 @@ container.registerSingleton<IUsersRepository>(
 container.registerSingleton<IVideosRepository>(
   'VideosRepository',
   PrismaVideosRepository,
+);
+
+container.registerSingleton<ITagsRepository>(
+  'TagsRepository',
+  PrismaTagsRepository,
 );
 
 container.register<PrismaClient>('PrismaClient', {

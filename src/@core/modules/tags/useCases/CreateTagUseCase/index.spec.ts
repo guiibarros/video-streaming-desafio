@@ -1,8 +1,8 @@
 import { TagFactory } from '@test/factories/TagFactory';
 import { InMemoryTagsRepository } from '@test/repositories/in-memory/InMemoryTagsRepository';
 
-import { TagAlreadyExistsError } from '../errors/TagAlreadyExistsError';
-import { CreateTagUseCase } from './CreateTagUseCase';
+import { TagAlreadyExistsError } from '../../errors/TagAlreadyExistsError';
+import { CreateTagUseCase } from './';
 
 let tagsRepository: InMemoryTagsRepository;
 let createTagUseCase: CreateTagUseCase;

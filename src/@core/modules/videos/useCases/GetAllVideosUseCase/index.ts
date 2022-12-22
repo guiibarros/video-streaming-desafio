@@ -1,7 +1,7 @@
 import { inject, injectable } from 'tsyringe';
 
-import { Video } from '../entities/Video';
-import { IVideosRepository } from '../repositories/IVideosRepository';
+import { Video } from '../../entities/Video';
+import { IVideosRepository } from '../../repositories/IVideosRepository';
 
 interface IGetAllVideosResponse {
   videos: Video[];

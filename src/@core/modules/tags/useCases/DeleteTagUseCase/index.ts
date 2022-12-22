@@ -1,7 +1,7 @@
 import { inject, injectable } from 'tsyringe';
 
-import { TagNotFoundError } from '../errors/TagNotFoundError';
-import { ITagsRepository } from '../repositories/ITagsRepository';
+import { TagNotFoundError } from '../../errors/TagNotFoundError';
+import { ITagsRepository } from '../../repositories/ITagsRepository';
 
 interface IDeleteTagRequest {
   tagId: string;

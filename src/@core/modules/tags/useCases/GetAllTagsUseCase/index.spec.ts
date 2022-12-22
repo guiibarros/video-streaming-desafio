@@ -1,7 +1,7 @@
 import { TagFactory } from '@test/factories/TagFactory';
 import { InMemoryTagsRepository } from '@test/repositories/in-memory/InMemoryTagsRepository';
 
-import { GetAllTagsUseCase } from './GetAllTagsUseCase';
+import { GetAllTagsUseCase } from './';
 
 let tagsRepository: InMemoryTagsRepository;
 let getAllTagsUseCase: GetAllTagsUseCase;

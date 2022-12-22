@@ -1,6 +1,6 @@
 import { InMemoryVideosRepository } from '@test/repositories/in-memory/InMemoryVideosRepository';
 
-import { UploadVideoUseCase } from './UploadVideoUseCase';
+import { UploadVideoUseCase } from './';
 
 describe('Upload video', () => {
   it('should be able to upload video', async () => {

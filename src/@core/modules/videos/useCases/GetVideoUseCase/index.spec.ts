@@ -1,8 +1,8 @@
 import { VideoFactory } from '@test/factories/VideoFactory';
 import { InMemoryVideosRepository } from '@test/repositories/in-memory/InMemoryVideosRepository';
 
-import { VideoNotFoundError } from '../errors/VideoNotFoundError';
-import { GetVideoUseCase } from './GetVideoUseCase';
+import { VideoNotFoundError } from '../../errors/VideoNotFoundError';
+import { GetVideoUseCase } from './';
 
 let videosRepository: InMemoryVideosRepository;
 let getVideoUseCase: GetVideoUseCase;

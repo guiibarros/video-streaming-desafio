@@ -1,8 +1,8 @@
 import { inject, injectable } from 'tsyringe';
 
-import { Video } from '../entities/Video';
-import { VideoNotFoundError } from '../errors/VideoNotFoundError';
-import { IVideosRepository } from '../repositories/IVideosRepository';
+import { Video } from '../../entities/Video';
+import { VideoNotFoundError } from '../../errors/VideoNotFoundError';
+import { IVideosRepository } from '../../repositories/IVideosRepository';
 
 interface IGetVideoRequest {
   videoId: string;

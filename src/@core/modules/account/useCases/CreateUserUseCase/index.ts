@@ -1,8 +1,8 @@
 import { inject, injectable } from 'tsyringe';
 
-import { User } from '../entities/User';
-import { UserAlreadyExistsError } from '../errors/UserAlreadyExistsError';
-import { IUsersRepository } from '../repositories/IUsersRepository';
+import { User } from '../../entities/User';
+import { UserAlreadyExistsError } from '../../errors/UserAlreadyExistsError';
+import { IUsersRepository } from '../../repositories/IUsersRepository';
 
 interface ICreateUserRequest {
   name: string;

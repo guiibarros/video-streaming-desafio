@@ -1,8 +1,8 @@
 import { inject, injectable } from 'tsyringe';
 
-import { Tag } from '../entities/Tag';
-import { TagAlreadyExistsError } from '../errors/TagAlreadyExistsError';
-import { ITagsRepository } from '../repositories/ITagsRepository';
+import { Tag } from '../../entities/Tag';
+import { TagAlreadyExistsError } from '../../errors/TagAlreadyExistsError';
+import { ITagsRepository } from '../../repositories/ITagsRepository';
 
 interface ICreateTagRequest {
   name: string;

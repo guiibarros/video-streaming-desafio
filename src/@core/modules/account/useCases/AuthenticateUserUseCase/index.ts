@@ -1,8 +1,8 @@
 import { inject, injectable } from 'tsyringe';
 
-import { IncorrectEmailOrPasswordError } from '../errors/IncorrectEmailOrPasswordError';
-import { IAuthProvider } from '../providers/IAuthProvider';
-import { IUsersRepository } from '../repositories/IUsersRepository';
+import { IncorrectEmailOrPasswordError } from '../../errors/IncorrectEmailOrPasswordError';
+import { IAuthProvider } from '../../providers/IAuthProvider';
+import { IUsersRepository } from '../../repositories/IUsersRepository';
 
 interface IAuthenticateUserRequest {
   email: string;
