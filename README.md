@@ -1,8 +1,6 @@
 # Streaming de video
 
-API RestFul implementada com Node.js, Express.js e Typescript, para fazer upload de videos e streaming, semelhante ao youtube e afins.
-
-Para começar a utilizar, é necessário criar uma conta na plataforma.
+API RestFul implementada com Node.js, Express.js e Typescript.
 
 ## Principais tecnologias utilizadas
 
