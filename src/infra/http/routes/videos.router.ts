@@ -1,5 +1,6 @@
 import { Router } from 'express';
 
+import { AddTagController } from '../controllers/videos/AddTagController';
 import { DeleteUserVideoController } from '../controllers/videos/DeleteUserVideoController';
 import { GetAllVideosController } from '../controllers/videos/GetAllVideosController';
 import { GetUserVideosController } from '../controllers/videos/GetUserVideosController';
@@ -16,6 +17,8 @@ const getVideoController = new GetVideoController();
 const deleteUserVideoController = new DeleteUserVideoController();
 const updateUserVideoController = new UpdateUserVideoController();
 
+const addTagController = new AddTagController();
+
 videosRouter.post('/', uploadVideosController.handle);
 
 videosRouter.get('/', getAllVideosController.handle);
@@ -24,5 +27,7 @@ videosRouter.get('/:id', getVideoController.handle);
 
 videosRouter.delete('/:id', deleteUserVideoController.handle);
 videosRouter.put('/:id', updateUserVideoController.handle);
+
+videosRouter.post('/:id/tags', addTagController.handle);
 
 export { videosRouter };

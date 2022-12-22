@@ -40,5 +40,7 @@ export class AddTagUseCase {
     if (!tag) {
       throw new TagNotFoundError();
     }
+
+    await this.videosRepository.addVideoTag(video.id, tag.id);
   }
 }
