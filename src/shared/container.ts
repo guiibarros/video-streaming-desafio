@@ -1,4 +1,5 @@
 import 'reflect-metadata';
+import { PrismaClient } from '@prisma/client';
 import { container } from 'tsyringe';
 
 import { IUsersRepository } from '@core/modules/account/repositories/IUsersRepository';
@@ -17,3 +18,7 @@ container.registerSingleton<IVideosRepository>(
   'VideosRepository',
   PrismaVideosRepository,
 );
+
+container.register<PrismaClient>('PrismaClient', {
+  useValue: new PrismaClient(),
+});

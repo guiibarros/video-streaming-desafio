@@ -1,22 +1,29 @@
+import { PrismaClient } from '@prisma/client';
 import { compare } from 'bcrypt';
+import { inject, injectable } from 'tsyringe';
 
 import { User } from '@core/modules/account/entities/User';
 import { IUsersRepository } from '@core/modules/account/repositories/IUsersRepository';
 
-import { prisma } from '../index';
 import { PrismaUserMapper } from '../mappers/PrismaUserMapper';
 
+@injectable()
 export class PrismaUsersRepository implements IUsersRepository {
+  public constructor(
+    @inject('PrismaClient')
+    private readonly prisma: PrismaClient,
+  ) {}
+
   public async create(user: User): Promise<void> {
     const raw = await PrismaUserMapper.toPrisma(user);
 
-    await prisma.user.create({
+    await this.prisma.user.create({
       data: raw,
     });
   }
 
   public async findById(userId: string): Promise<User | null> {
-    const raw = await prisma.user.findUnique({
+    const raw = await this.prisma.user.findUnique({
       where: {
         id: userId,
       },
@@ -30,7 +37,7 @@ export class PrismaUsersRepository implements IUsersRepository {
   }
 
   public async findByEmail(email: string): Promise<User | null> {
-    const raw = await prisma.user.findFirst({
+    const raw = await this.prisma.user.findFirst({
       where: {
         email,
       },

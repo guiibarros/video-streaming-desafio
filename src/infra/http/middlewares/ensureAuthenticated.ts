@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import { verify } from 'jsonwebtoken';
+import { container } from 'tsyringe';
 
 import auth from '@core/config/auth';
 import { BaseError } from '@core/errors/BaseError';
@@ -28,7 +29,7 @@ export async function ensureAuthenticated(
   try {
     const { sub: userId } = verify(token, secret) as IVerifyPayload;
 
-    const usersRepository = new PrismaUsersRepository();
+    const usersRepository = container.resolve(PrismaUsersRepository);
     const user = await usersRepository.findById(userId);
 
     if (!user) {

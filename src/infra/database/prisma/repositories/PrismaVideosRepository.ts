@@ -1,18 +1,26 @@
+import { PrismaClient } from '@prisma/client';
+import { inject, injectable } from 'tsyringe';
+
 import { Video } from '@core/modules/videos/entities/Video';
 import { IVideosRepository } from '@core/modules/videos/repositories/IVideosRepository';
 
-import { prisma } from '../index';
 import { PrismaVideoMapper } from '../mappers/PrismaVideoMapper';
 
+@injectable()
 export class PrismaVideosRepository implements IVideosRepository {
+  public constructor(
+    @inject('PrismaClient')
+    private readonly prisma: PrismaClient,
+  ) {}
+
   public async create(video: Video): Promise<void> {
-    await prisma.video.create({
+    await this.prisma.video.create({
       data: PrismaVideoMapper.toPrisma(video),
     });
   }
 
   public async findById(videoId: string): Promise<Video | null> {
-    const raw = await prisma.video.findUnique({
+    const raw = await this.prisma.video.findUnique({
       where: {
         id: videoId,
       },
@@ -26,7 +34,7 @@ export class PrismaVideosRepository implements IVideosRepository {
   }
 
   public async findManyByUserId(userId: string): Promise<Video[]> {
-    const raw = await prisma.video.findMany({
+    const raw = await this.prisma.video.findMany({
       where: {
         userId,
       },
@@ -39,7 +47,7 @@ export class PrismaVideosRepository implements IVideosRepository {
     videoId: string,
     userId: string,
   ): Promise<Video | null> {
-    const raw = await prisma.video.findFirst({
+    const raw = await this.prisma.video.findFirst({
       where: {
         id: videoId,
         userId,
@@ -54,13 +62,13 @@ export class PrismaVideosRepository implements IVideosRepository {
   }
 
   public async findMany(): Promise<Video[]> {
-    const videos = await prisma.video.findMany();
+    const videos = await this.prisma.video.findMany();
 
     return videos.map(PrismaVideoMapper.toDomain);
   }
 
   public async save(video: Video): Promise<void> {
-    await prisma.video.update({
+    await this.prisma.video.update({
       where: {
         id: video.id,
       },
@@ -69,7 +77,7 @@ export class PrismaVideosRepository implements IVideosRepository {
   }
 
   public async deleteById(videoId: string): Promise<void> {
-    await prisma.video.delete({
+    await this.prisma.video.delete({
       where: {
         id: videoId,
       },
