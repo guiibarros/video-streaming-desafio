@@ -10,6 +10,10 @@ interface IAuthenticateUserRequest {
 }
 
 interface IAuthenticateUserResponse {
+  user: {
+    email: string;
+    name: string;
+  };
   token: string;
 }
 
@@ -33,13 +37,22 @@ export class AuthenticateUserUseCase {
       throw new IncorrectEmailOrPasswordError();
     }
 
-    if (user.password !== password) {
+    const isPasswordMatch = await this.usersRepository.comparePassword(
+      password,
+      user.password,
+    );
+
+    if (!isPasswordMatch) {
       throw new IncorrectEmailOrPasswordError();
     }
 
     const token = this.authProvider.login(user.id);
 
     return {
+      user: {
+        email: user.email,
+        name: user.name,
+      },
       token,
     };
   }

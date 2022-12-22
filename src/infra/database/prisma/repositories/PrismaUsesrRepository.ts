@@ -1,3 +1,5 @@
+import { compare } from 'bcrypt';
+
 import { User } from '@core/modules/account/entities/User';
 import { IUsersRepository } from '@core/modules/account/repositories/IUsersRepository';
 
@@ -6,8 +8,10 @@ import { PrismaUserMapper } from '../mappers/PrismaUserMapper';
 
 export class PrismaUsersRepository implements IUsersRepository {
   public async create(user: User): Promise<void> {
+    const raw = await PrismaUserMapper.toPrisma(user);
+
     await prisma.user.create({
-      data: PrismaUserMapper.toPrisma(user),
+      data: raw,
     });
   }
 
@@ -37,5 +41,12 @@ export class PrismaUsersRepository implements IUsersRepository {
     }
 
     return PrismaUserMapper.toDomain(raw);
+  }
+
+  public async comparePassword(
+    password: string,
+    passwordHash: string,
+  ): Promise<boolean> {
+    return await compare(password, passwordHash);
   }
 }

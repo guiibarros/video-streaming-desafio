@@ -15,7 +15,7 @@ export class Video {
 
   public constructor(
     props: Replace<IVideoProps, { createdAt?: Date }>,
-    id: string,
+    id?: string,
   ) {
     this._id = id ?? randomUUID();
 

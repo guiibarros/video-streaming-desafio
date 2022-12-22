@@ -27,4 +27,11 @@ export class InMemoryUsersRepository implements IUsersRepository {
 
     return user;
   }
+
+  public async comparePassword(
+    password: string,
+    passwordHash: string,
+  ): Promise<boolean> {
+    return password === passwordHash;
+  }
 }
