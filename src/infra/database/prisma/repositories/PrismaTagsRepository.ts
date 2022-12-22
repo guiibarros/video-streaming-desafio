@@ -14,7 +14,7 @@ export class PrismaTagsRepository implements ITagsRepository {
   ) {}
 
   public async create(tag: Tag): Promise<void> {
-    const raw = await PrismaTagMapper.toPrisma(tag);
+    const raw = PrismaTagMapper.toPrisma(tag);
 
     await this.prisma.tag.create({
       data: raw,
@@ -56,8 +56,6 @@ export class PrismaTagsRepository implements ITagsRepository {
   }
 
   public async save(tag: Tag): Promise<void> {
-    console.log(tag);
-
     await this.prisma.tag.update({
       where: {
         id: tag.id,
