@@ -11,6 +11,7 @@ interface IAuthenticateUserRequest {
 
 interface IAuthenticateUserResponse {
   user: {
+    id: string;
     email: string;
     name: string;
   };
@@ -50,6 +51,7 @@ export class AuthenticateUserUseCase {
 
     return {
       user: {
+        id: user.id,
         email: user.email,
         name: user.name,
       },

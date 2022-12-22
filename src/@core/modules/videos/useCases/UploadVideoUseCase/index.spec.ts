@@ -11,6 +11,7 @@ describe('Upload video', () => {
       title: 'test',
       description: 'test',
       userId: 'test',
+      videoUrl: 'http://test.com/test.mp4',
     });
 
     expect(videosRepository.videos).toHaveLength(1);

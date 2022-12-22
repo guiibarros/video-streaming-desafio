@@ -8,6 +8,7 @@ export class VideoFactory {
       title: 'test',
       description: 'test',
       userId: 'test',
+      videoUrl: 'http://test.com/test.mp4',
       ...override,
     });
   }

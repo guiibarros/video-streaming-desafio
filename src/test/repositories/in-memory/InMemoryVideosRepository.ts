@@ -1,8 +1,16 @@
 import { Video } from '@core/modules/videos/entities/Video';
 import { IVideosRepository } from '@core/modules/videos/repositories/IVideosRepository';
 
+import { InMemoryTagsRepository } from './InMemoryTagsRepository';
+
+interface IVideosTags {
+  videoId: string;
+  tagId: string;
+}
+
 export class InMemoryVideosRepository implements IVideosRepository {
   public readonly videos: Video[] = [];
+  public readonly videosTags: IVideosTags[] = [];
 
   public async create(video: Video): Promise<void> {
     this.videos.push(video);
@@ -22,6 +30,33 @@ export class InMemoryVideosRepository implements IVideosRepository {
     const videos = this.videos.filter((video) => video.userId === userId);
 
     return videos;
+  }
+
+  public async addVideoTag(videoId: string, tagId: string): Promise<void> {
+    this.videosTags.push({
+      videoId,
+      tagId,
+    });
+  }
+
+  public async findManyByTagName(tagName: string): Promise<Video[]> {
+    const tagsRepository = new InMemoryTagsRepository();
+
+    const tag = await tagsRepository.findByName(tagName);
+
+    const videosTagsMatches = this.videosTags.filter(
+      (videoTag) => videoTag.tagId === tag?.id,
+    );
+
+    let filteredVideos: Video[] = [];
+
+    videosTagsMatches.forEach((videoTag) => {
+      filteredVideos = this.videos.filter(
+        (video) => video.id === videoTag.videoId,
+      );
+    });
+
+    return filteredVideos;
   }
 
   public async findByIdAndUserId(
