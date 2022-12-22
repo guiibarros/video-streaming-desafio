@@ -7,7 +7,7 @@
   "scripts": {
     "start:dev": "ts-node-dev -r tsconfig-paths/register --respawn --exit-child --ignore-watch ./node_modules --transpile-only ./src/infra/http/server.ts",
     "lint": "eslint \"src/**/*.ts\" --fix",
-    "test": "jest",
+    "test": "jest --maxWorkers=25%",
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage"
   },
