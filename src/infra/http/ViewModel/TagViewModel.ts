@@ -1,4 +1,4 @@
-import { Tag } from '@core/modules/tags/entities/Tag';
+import { Tag } from '@core/modules/videos/entities/Tag';
 
 interface ITagToHTTP {
   id: string;

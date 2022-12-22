@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 
-import { CreateTagUseCase } from '@core/modules/tags/useCases/CreateTagUseCase';
+import { CreateTagUseCase } from '@core/modules/videos/useCases/CreateTagUseCase';
 import { TagViewModel } from '@infra/http/ViewModel/TagViewModel';
 
 export class CreateTagController {

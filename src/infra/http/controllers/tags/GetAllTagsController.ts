@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 
-import { GetAllTagsUseCase } from '@core/modules/tags/useCases/GetAllTagsUseCase';
+import { GetAllTagsUseCase } from '@core/modules/videos/useCases/GetAllTagsUseCase';
 import { TagViewModel } from '@infra/http/ViewModel/TagViewModel';
 
 export class GetAllTagsController {

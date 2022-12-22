@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 
-import { DeleteTagUseCase } from '@core/modules/tags/useCases/DeleteTagUseCase';
+import { DeleteTagUseCase } from '@core/modules/videos/useCases/DeleteTagUseCase';
 
 export class DeleteTagController {
   public async handle(request: Request, response: Response): Promise<Response> {

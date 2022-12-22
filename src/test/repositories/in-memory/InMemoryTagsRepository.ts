@@ -1,5 +1,5 @@
-import { Tag } from '@core/modules/tags/entities/Tag';
-import { ITagsRepository } from '@core/modules/tags/repositories/ITagsRepository';
+import { Tag } from '@core/modules/videos/entities/Tag';
+import { ITagsRepository } from '@core/modules/videos/repositories/ITagsRepository';
 
 export class InMemoryTagsRepository implements ITagsRepository {
   public readonly tags: Tag[] = [];

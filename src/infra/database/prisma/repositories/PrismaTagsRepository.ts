@@ -1,8 +1,8 @@
 import { PrismaClient } from '@prisma/client';
 import { inject, injectable } from 'tsyringe';
 
-import { Tag } from '@core/modules/tags/entities/Tag';
-import { ITagsRepository } from '@core/modules/tags/repositories/ITagsRepository';
+import { Tag } from '@core/modules/videos/entities/Tag';
+import { ITagsRepository } from '@core/modules/videos/repositories/ITagsRepository';
 
 import { PrismaTagMapper } from '../mappers/PrismaTagMapper';
 

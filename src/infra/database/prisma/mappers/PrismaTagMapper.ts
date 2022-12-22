@@ -1,6 +1,6 @@
 import { Tag as RawTag } from '@prisma/client';
 
-import { Tag } from '@core/modules/tags/entities/Tag';
+import { Tag } from '@core/modules/videos/entities/Tag';
 
 export class PrismaTagMapper {
   private constructor() {}

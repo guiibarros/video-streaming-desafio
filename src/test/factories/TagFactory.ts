@@ -1,4 +1,4 @@
-import { ITagProps, Tag } from '@core/modules/tags/entities/Tag';
+import { ITagProps, Tag } from '@core/modules/videos/entities/Tag';
 
 export class TagFactory {
   private constructor() {}

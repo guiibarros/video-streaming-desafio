@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 
-import { UpdateTagUseCase } from '@core/modules/tags/useCases/UpdateTagUseCase';
+import { UpdateTagUseCase } from '@core/modules/videos/useCases/UpdateTagUseCase';
 
 export class UpdateTagController {
   public async handle(request: Request, response: Response): Promise<Response> {

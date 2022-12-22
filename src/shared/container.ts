@@ -3,7 +3,7 @@ import { PrismaClient } from '@prisma/client';
 import { container } from 'tsyringe';
 
 import { IUsersRepository } from '@core/modules/account/repositories/IUsersRepository';
-import { ITagsRepository } from '@core/modules/tags/repositories/ITagsRepository';
+import { ITagsRepository } from '@core/modules/videos/repositories/ITagsRepository';
 import { IVideosRepository } from '@core/modules/videos/repositories/IVideosRepository';
 import { PrismaTagsRepository } from '@infra/database/prisma/repositories/PrismaTagsRepository';
 import { PrismaUsersRepository } from '@infra/database/prisma/repositories/PrismaUsesrRepository';
