@@ -68,6 +68,20 @@ export class PrismaVideosRepository implements IVideosRepository {
     return videos.map(PrismaVideoMapper.toDomain);
   }
 
+  public async findManyByTagName(tagName: string): Promise<Video[]> {
+    const raw = await this.prisma.video.findMany({
+      where: {
+        tags: {
+          some: {
+            name: tagName,
+          },
+        },
+      },
+    });
+
+    return raw.map(PrismaVideoMapper.toDomain);
+  }
+
   public async save(video: Video): Promise<void> {
     await this.prisma.video.update({
       where: {
