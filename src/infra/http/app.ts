@@ -2,13 +2,16 @@ import '@shared/container';
 import 'express-async-errors';
 
 import express, { NextFunction, Request, Response } from 'express';
+import swagger from 'swagger-ui-express';
 
 import { BaseError } from '@core/errors/BaseError';
 
+import swaggerJson from '../../swagger.json';
 import { router } from './routes';
 
 const app = express();
 
+app.use('/api-docs', swagger.serve, swagger.setup(swaggerJson));
 app.use(express.json());
 app.use(router);
 

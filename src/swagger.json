@@ -1,0 +1,528 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Streaming de video",
+    "description": "API de streaming de video",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/users": {
+      "post": {
+        "summary": "Criar uma nova conta na plataforma",
+        "tags": ["Conta"],
+        "description": "Criar uma nova conta",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "name": "Lucas",
+                  "email": "lucas@email.com",
+                  "password": "abc123"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Criado com sucesso."
+          },
+          "400": {
+            "description": "Conta já cadastrada."
+          }
+        }
+      }
+    },
+    "/sessions": {
+      "post": {
+        "summary": "Autenticar conta",
+        "tags": ["Conta"],
+        "description": "Retorna um JWT token para autenticação em outros endpoints, caso todas as credenciais estejam válidas",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "email": "lucas@email.com",
+                  "password": "abc123"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Autenticado com sucesso."
+          },
+          "401": {
+            "description": "Credenciais inválidas."
+          }
+        }
+      }
+    },
+    "/videos/{id}/tags": {
+      "post": {
+        "summary": "Adicionar tag a um video",
+        "description": "Adicionar tag a um video passando o id da tag pelo corpo da requisição",
+        "tags": ["Video"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "Id do video a ter a tag vinculada.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "tagId": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Adicionado com sucesso."
+          },
+          "404": {
+            "description": "Video ou tag inexistentes."
+          },
+          "401": {
+            "description": "Token inválido, ausente ou usuário inexistente."
+          }
+        }
+      }
+    },
+    "/videos": {
+      "post": {
+        "summary": "Upload de video",
+        "tags": ["Video"],
+        "description": "Fazer upload de um video e persistir no banco de dados",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "videoUrl": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "title": "Minecraft gameplay",
+                  "description": "Minecraft gameplay saga",
+                  "videoUrl": "http://youtube.com"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Criado com sucesso."
+          },
+          "401": {
+            "description": "Token inválido, ausente ou usuário inexistente."
+          }
+        }
+      },
+      "get": {
+        "summary": "Listar todos os videos disponíveis na plataforma",
+        "tags": ["Video"],
+        "description": "Listar todos os videos que foram enviados na plataforma",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Sucesso na listagem."
+          },
+          "401": {
+            "description": "Token inválido, ausente ou usuário inexistente."
+          }
+        }
+      }
+    },
+    "/tags/{tagName}/videos": {
+      "get": {
+        "summary": "Listar todos os videos de uma tag",
+        "tags": ["Video"],
+        "description": "Listar todos os videos da plataforma pelo pela tag",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "tagName",
+            "required": true,
+            "description": "Nome da tag",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Sucesso na listagem."
+          },
+          "401": {
+            "description": "Token inválido, ausente ou usuário inexistente."
+          }
+        }
+      }
+    },
+    "/videos/from/{userId}": {
+      "get": {
+        "summary": "Listar videos de um usuário",
+        "tags": ["Video"],
+        "description": "Listar videos da plataforma pelo id da conta de usuário",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "description": "Id do usuário cadastrado nos videos que deseja listar",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Sucesso na listagem."
+          },
+          "401": {
+            "description": "Token inválido, ausente ou usuário inexistente."
+          }
+        }
+      }
+    },
+    "/videos/{id}": {
+      "get": {
+        "summary": "Listar um video",
+        "tags": ["Video"],
+        "description": "Listar um video da plataforma pelo id",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "Id do video que deseja listar",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Sucesso na listagem."
+          },
+          "404": {
+            "description": "Video não encontrado."
+          },
+          "401": {
+            "description": "Token inválido, ausente ou usuário inexistente."
+          }
+        }
+      },
+      "put": {
+        "summary":"Atualizar um video da conta autenticada",
+        "tags": ["Video"],
+        "description": "Atualizar video da conta autenticada, passando o id do video como parâmetro",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "Id do video que deseja atualizar",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "title": "Tiktok dance trending compilation",
+                  "description": "Tiktok dance trendings"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Sucesso na atualização."
+          },
+          "404": {
+            "description": "Video não encontrado."
+          },
+          "401": {
+            "description": "Token inválido, ausente ou usuário inexistente."
+          }
+        }
+      },
+      "delete": {
+        "summary":"Deletar um video da conta autenticada",
+        "tags": ["Video"],
+        "description": "Deletar video da conta autenticada, passando o id do video como parâmetro",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "Id do video que deseja deletar",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Sucesso na deleção."
+          },
+          "404": {
+            "description": "Video não encontrado."
+          },
+          "401": {
+            "description": "Token inválido, ausente ou usuário inexistente."
+          }
+        }
+      }
+    },
+    "/tags": {
+      "post": {
+        "summary": "Criar uma nova tag",
+        "tags": ["Tag"],
+        "description": "Criar uma nova tag.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "name": "gaming"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Criado com sucesso."
+          },
+          "400": {
+            "description": "Tag já cadastrada."
+          },
+          "401": {
+            "description": "Token inválido, ausente ou usuário inexistente."
+          }
+        }
+      },
+      "get": {
+        "summary": "Listar todas as tags",
+        "tags": ["Tag"],
+        "description": "Listar todas as tags que foram cadastradas na plataforma",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Sucesso na listagem."
+          },
+          "401": {
+            "description": "Token inválido, ausente ou usuário inexistente."
+          }
+        }
+      }
+    },
+    "/tags/{id}": {
+      "put": {
+        "summary":"Atualizar uma tag",
+        "tags": ["Tag"],
+        "description": "Atualizar tag, passando o id como parâmetro",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "Id da tag que deseja atualizar",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "name": "music"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Sucesso na atualização."
+          },
+          "404": {
+            "description": "Tag não encontrada."
+          },
+          "401": {
+            "description": "Token inválido, ausente ou usuário inexistente."
+          }
+        }
+      },
+      "delete": {
+        "summary":"Deletar uma tag",
+        "tags": ["Tag"],
+        "description": "Deletar tag, passando o id como parâmetro",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "Id da tag que deseja deletar",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Sucesso na deleção."
+          },
+          "404": {
+            "description": "Tag não encontrada."
+          },
+          "401": {
+            "description": "Token inválido, ausente ou usuário inexistente."
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "jwt"
+      }
+    }
+  }
+}
