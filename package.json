@@ -6,7 +6,7 @@
   "private": true,
   "scripts": {
     "build": "babel ./src --extensions \".js,.ts\" --out-dir ./dist --copy-files",
-    "start:prod": "node ./dist/src/infra/http/server.js",
+    "start:prod": "node ./dist/infra/http/server.js",
     "start:dev": "ts-node-dev -r tsconfig-paths/register --respawn --exit-child --ignore-watch ./node_modules --transpile-only ./src/infra/http/server.ts",
     "lint": "eslint \"src/**/*.ts\" --fix",
     "test": "jest --maxWorkers=25%",
