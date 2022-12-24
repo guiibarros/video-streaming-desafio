@@ -1,0 +1,28 @@
+name: CI Pipeline
+
+
+on:
+  push:
+    branches: ["main"]
+
+
+jobs:
+  build:
+    name: Build 🛠️
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: lts/fermium
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Build
+        run: yarn build
+
+      - name: Run tests
+        run: yarn test
