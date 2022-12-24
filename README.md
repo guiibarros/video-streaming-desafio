@@ -14,7 +14,7 @@ API RestFul implementada com Node.js, Express.js e Typescript.
 
 ## Estrutura do projeto
 
-Utilizado conceitos do clean architecture para separar o máximo possível a camada da aplicação em si - o núcleo do app, onde ficam todaa aa regraa de negócio, entidades, casos de usos, o domínio -, do resto, no caso a camada de infraestrutura, onde estão todas as implementações de baixo nível, como o framework utilizado, banco de dados, etc. Dessa forma, a aplicação fica quase 100% desacoplada, sem dependendo de implementações de banco de dados e afins.
+Utilizado conceitos do clean architecture para separar o máximo possível a camada da aplicação em si - o núcleo do app, onde ficam todas as regras de negócio, entidades, casos de usos, o domínio -, do resto, no caso a camada de infraestrutura, onde estão todas as implementações de baixo nível, como o framework utilizado, banco de dados, etc. Dessa forma, a aplicação fica quase 100% desacoplada, sem dependendo de implementações de banco de dados e afins.
 
 - @core - núcleo da aplicação
 - infra - camada de baixo nível, contendo implementações que não diz respeito às regras de uso da aplicação
@@ -30,6 +30,13 @@ Utilizado bastante os princípios de **S.O.L.I.D.**. Principalmente a inversão 
 Execute este comando para iniciar os testes:
 ```
 $ yarn test
+```
+
+## Rodar as migrations
+
+Execute este comando para executar as migrations do prisma:
+```
+$ yarn prisma migrate dev
 ```
 
 ## Rodar a aplicação
